@@ -1,0 +1,134 @@
+# H.E.I.P. Example Program
+# Demonstrates Instructional Programming paradigm
+
+# Protocol definition - sequence of instructions
+Protocol greet
+    State message = "Hello from H.E.I.P. v4.0!"
+    Instruct say message
+End
+
+# Protocol with state management
+Protocol calculate
+    State x = 10
+    State y = 20
+    Bubble result
+    
+    Instruct load x
+    Instruct load y
+    Instruct add
+    Instruct store result
+    
+    Instruct say result
+End
+
+# Franchise - organizational structure
+Franchise MathOperations
+    Protocol multiply
+    State a = 5
+  State b = 7
+   
+        Instruct load a
+        Instruct load b
+        Instruct mul
+    End
+    
+    Protocol divide
+        State numerator = 100
+        State denominator = 4
+        
+        Instruct load numerator
+  Instruct load denominator
+ Instruct div
+    End
+End
+
+# Guide - protocol reference and execution
+Guide call greet
+Guide call calculate
+Guide call MathOperations.multiply
+
+# Overlay example - compressed symbolic representation
+# The compiler will replace these with dodecagramic symbols (0-9, a-b, c-z)
+Overlay StandardLoop
+    State counter = 0
+    State limit = 10
+    
+    Instruct compare counter limit
+    Instruct jump_if_equal exit
+    Instruct add counter 1
+  Instruct jump start
+End
+
+# Chain - immutable sequence
+Chain constants
+    42
+    3.14159
+    "H.E.I.P."
+End
+
+# Bubble - mutable container
+Bubble dynamic_data
+ push 100
+    push 200
+    push 300
+End
+
+# Superlative reference - dynamic best-reference resolver
+Superlative fastest_sort
+    Range performance_metrics
+    Resolve based_on "execution_time"
+End
+
+# Range - contextual execution boundary
+Range startup
+    Instruct initialize
+    Instruct load_config
+    Instruct verify_system
+End
+
+# State with forensic tracking
+State traced_variable = 0
+    Traced true
+ Mutable true
+End
+
+# HELP integration - learning and adaptation
+HELP Recommend optimization_level
+HELP Learn from_execution_patterns
+HELP Heal if_error_detected
+
+# Protocol with self-healing
+Protocol safe_operation
+    State attempt = 0
+    
+    Instruct try_operation
+    Instruct on_error
+      HELP Heal
+        Instruct restore_checkpoint
+ Instruct retry
+    End
+End
+
+# Dodecagramic overlay - single symbol replaces entire structure
+# Compiler will map this to '0', '1', '2', 'a', 'b', etc.
+0: StandardLoop
+1: greet
+2: calculate
+a: MathOperations.multiply
+b: safe_operation
+
+# Execute compressed protocols using symbols
+Guide call 0  # Executes StandardLoop
+Guide call 1  # Executes greet
+Guide call 2  # Executes calculate
+Guide call a  # Executes MathOperations.multiply
+Guide call b  # Executes safe_operation
+
+# Frame creation with checkpointing
+Frame main_execution
+    Protocol run
+   Instruct checkpoint
+        Guide call all_protocols
+    Instruct on_completion
+  End
+End
