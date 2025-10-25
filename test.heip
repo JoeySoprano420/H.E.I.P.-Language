@@ -1,0 +1,29 @@
+# Simple H.E.I.P. Test Program
+# Tests basic functionality
+
+Protocol test_arithmetic
+ State x = 5
+    State y = 10
+  
+    Instruct load x
+    Instruct load y
+    Instruct add
+End
+
+Protocol test_state
+    State message = "Testing H.E.I.P. state management"
+    Bubble data
+ 
+    Instruct load message
+    Instruct store data
+End
+
+Franchise TestSuite
+    Protocol run_all_tests
+        Guide call test_arithmetic
+  Guide call test_state
+    End
+End
+
+# Main execution
+Guide call TestSuite.run_all_tests
