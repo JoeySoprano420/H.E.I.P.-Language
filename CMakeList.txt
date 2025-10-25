@@ -1,0 +1,67 @@
+cmake_minimum_required(VERSION 3.10)
+project(HEIP_Lang VERSION 4.0.0 LANGUAGES CXX)
+
+# Set C++14 standard
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+# Output directories
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
+# Include directories
+include_directories(
+  ${PROJECT_SOURCE_DIR}/src
+    ${PROJECT_SOURCE_DIR}/src/core
+    ${PROJECT_SOURCE_DIR}/src/runtime
+)
+
+# Source files
+set(CORE_SOURCES
+    src/core/dodeca_compiler.cpp
+    src/core/heip_types.h
+    src/core/dodeca_compiler.h
+)
+
+set(RUNTIME_SOURCES
+    src/runtime/frame_runtime.cpp
+    src/runtime/frame_runtime.h
+)
+
+set(MAIN_SOURCES
+ src/main.cpp
+)
+
+# Create executable
+add_executable(heip
+  ${MAIN_SOURCES}
+    ${CORE_SOURCES}
+    ${RUNTIME_SOURCES}
+)
+
+# Compiler warnings
+if(MSVC)
+    target_compile_options(heip PRIVATE /W3)
+else()
+    target_compile_options(heip PRIVATE -Wall -Wextra -pedantic)
+endif()
+
+# Installation
+install(TARGETS heip DESTINATION bin)
+install(FILES 
+    docs/LANGUAGE_GUIDE.md 
+    README.md 
+    DESTINATION docs
+)
+install(FILES
+    examples/demo.heip
+    DESTINATION examples
+)
+
+# Print configuration
+message(STATUS "H.E.I.P. v${PROJECT_VERSION} Configuration:")
+message(STATUS "  C++ Standard: C++${CMAKE_CXX_STANDARD}")
+message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}")
+message(STATUS "  Install Prefix: ${CMAKE_INSTALL_PREFIX}")
